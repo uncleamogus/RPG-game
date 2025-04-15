@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PLayerShoot : MonoBehaviour
+{
+    public float interval = 2f;
+    public float timer = 2f;
+    public GameObject purple;
+    public Transform updatepurple;
+
+    private void Update()
+    {
+        if(Time.time >= timer)
+        {
+            Shoot();
+            timer = Time.time + interval;
+        }
+    }
+
+    void Shoot()
+    {
+        GameObject projectile = Instantiate(purple, updatepurple.position, updatepurple.rotation);
+        Rigidbody body = projectile.GetComponent<Rigidbody>();
+        body.AddForce(updatepurple.forward * 20f, ForceMode.Impulse);
+    }
+}
