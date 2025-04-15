@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class enemymoved : MonoBehaviour
+{
+    public float speed = 6f;
+    public Transform[] chekpoints;
+    private int chekpointId = 0;
+    float step;
+
+    private void Start()
+    {
+        step = speed * Time.deltaTime;
+    }
+
+    private void Update()
+    {
+        if(chekpointId < chekpoints.Length)
+        {
+            Transform currentChekpoint = chekpoints[chekpointId];
+            transform.position = Vector3.MoveTowards(transform.position, currentChekpoint.position, step);
+            if(Vector3.Distance(transform.position, currentChekpoint.position) < 0.25f)
+            {
+                chekpointId++;
+            }
+        }
+        else
+        {
+            chekpointId = chekpoints.Length;
+        }
+    }
+}
